@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Developing Data Products - Module 9</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Developing Data Products - Module 9">
+  <meta name="author" content="D. C. Tee">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Developing Data Products - Module 9</h1>
+    <h2>~ App for Light Guiding For Optical Communication ~</h2>
+    <p>D. C. Tee<br/>Pitch Presentation</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Introduction</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>This presentation is part of the course project for module 9 - <strong>&quot;Developing Data Products&quot;</strong>. The project consists of two parts, where in the first part, we are require to create a simple and interactive shiny application and deploy it on Rstudio&#39;s servers. The second part requires us to produce a reproducible pitch presentation based on Slidify or Rstudio Presenter about the application that we have created. The presentation that you are reading now is to address for the second part of the course project.  </p>
+
+<p>The shiny application that I have developed is available at:<br>
+<a href="https://dctee.shinyapps.io/project">https://dctee.shinyapps.io/project</a>  </p>
+
+<p>Source code for ui.R and server.R files for the application are available on my GitHub:<br>
+<a href="https://github.com/teedinchai/m9_DDP">https://github.com/teedinchai/m9_DDP</a>  </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Functions of My Shiny Application</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>This &quot;<strong>Light Guiding for Optical Communication</strong>&quot; shiny application is built for the purpose to help user to obtain some useful design parameters for optical communication which is based on utilizing light (electromagnetic wave) to transmit signal for communication purposes. This application requires user to select and keying inputs, then, it solves some formula/equation to obtain the output, finally, the calculated results are displayed for user.</p>
+
+<p>This application first computes the refractive index of the material (medium for light transmission) from 1um to 4um wavelengths and display the refractive index vs wavelength graph for the specific optical material. It also calculates refractive index at a specific wavelength based on Sellmeier Equation after the user press the &quot;calculate refractive index&quot; button. </p>
+
+<p>Secondly, this application computes light guiding properties when the light travels from medium 1 entering into medium 2 with different refractive indices. From the refractive indices choosen by user, the application computes the critical angle for total internal reflection to happen, the speed of light in the medium, the reflectivity and transmission coefficient for normal incident (90degree, perpendicular to the interface between mediums) light. Finally, more data, parameters and equations can be included in the application, however, it is not consider for the current version.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Plot (Refractive Index vs Wavelength)</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Example plot for refractive index (Silica) versus wavelength displayed on the application. Three other popular optical materials (silicon, GaAs and ZBLAN) are available for user to select. </p>
+
+<p><img src="assets/fig/unnamed-chunk-2-1.png" alt="plot of chunk unnamed-chunk-2"> </p>
+
+<p>The refractive index at specific wavelength for the optical material is calculated for user:</p>
+
+<pre><code class="r">RI&lt;-sqrt((0.6961663*L/(L-0.0684043^2))+(0.4079426*L/(L-0.1162414^2))+(0.8974794*L/(L-9.896161^2))+1)
+</code></pre>
+
+<p>Example: The refractive index for Silica, Si02 at wavelength of 1.55um is 1.4440236</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Results On Optical Characteristics</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The application acquires refractive indices for two materials from user and calculates the corresponding Critical Angle, Velocity of light in medium, Reflectivity and Transmission Coefficients for normal incident light which are important for light guiding in optical fiber and optical waveguide. </p>
+
+<pre><code class="r"># Solving equation for important parameters
+n1 &lt;- 1.5  #first material
+n2 &lt;- 1  #second material
+Critical_Angle &lt;- (asin(n2/n1)) * 180/pi
+LightSpeed &lt;- 299792.458/n1
+Rflectivity &lt;- ((n2 - n1)/(n2 + n1))^2 * 100
+Transmission &lt;- (1 - ((n2 - n1)/(n2 + n1))^2) * 100
+</code></pre>
+
+<p>Computed Results:<br>
+When light enters from medium n1 with refractive index 1.5 into medium n2 with refractive index 1.0, the critical angle is 41.8103149 degree, with light speed of 199861.638 km/s, reflectivity of 4% and transmission efficiency of 96%.  </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Introduction'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Functions of My Shiny Application'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Plot (Refractive Index vs Wavelength)'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Results On Optical Characteristics'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
