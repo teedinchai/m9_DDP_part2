@@ -7,7 +7,7 @@ framework   : io2012       # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
 hitheme     : tomorrow      # 
 widgets     : []            # {mathjax, quiz, bootstrap}
-mode        : selfcontained # {standalone, draft}
+mode        : standalone # {standalone, draft, selfcontained}
 knit        : slidify::knit2slides
 ---
 
@@ -35,7 +35,7 @@ Secondly, this application computes light guiding properties when the light trav
 ## Plot (Refractive Index vs Wavelength)
 Example plot for refractive index (Silica) versus wavelength displayed on the application. Three other popular optical materials (silicon, GaAs and ZBLAN) are available for user to select. 
 
-![plot of chunk unnamed-chunk-2](assets/fig/unnamed-chunk-2-1.png) 
+![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2-1.png) 
   
 The refractive index at specific wavelength for the optical material is calculated for user:
 

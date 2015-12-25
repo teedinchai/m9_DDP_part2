@@ -9,7 +9,8 @@ The shiny app developed for the assignment is avalilable at:
 Source code for ui.R and server.R files are available on the GitHub:  
 <https://github.com/teedinchai/m9_DDP>
 
-The presentation is available at: 
+The presentation is available at:  
+<http://rpubs.com/DC_Tee/137058>
 
 The title for this shiny application is **"Light Guiding for Optical Communication"**. The function of this application is to calculate the refractive index versus wavelength for four popular optical materials (Silica, Silicon, Gallium Arsenide and ZBALN). Besides that, it also calculate the critical angle for total internal reflection, velocity of light in the transmission medium, reflectivity and transmission coefficient for normal incident light.  
 
